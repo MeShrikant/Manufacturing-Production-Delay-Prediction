@@ -1,0 +1,115 @@
+{
+  "data_is_synthetic": true,
+  "note": "Metrics are on the newest 15% of a SYNTHETIC dataset. They are not real-factory results.",
+  "test_rows": 450,
+  "test_period": [
+    "2024-04-12",
+    "2024-12-30"
+  ],
+  "modes": {
+    "plan": {
+      "description": "Pre-shift planning risk. Uses only information known before the shift starts.",
+      "classifier": "RandomForest",
+      "classification": {
+        "accuracy": 0.44,
+        "precision_macro": 0.4401,
+        "recall_macro": 0.4502,
+        "f1_macro": 0.4414,
+        "majority_class_baseline_accuracy": 0.4,
+        "confusion_matrix_rows_true_cols_pred": {
+          "labels": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "matrix": [
+            [
+              61,
+              37,
+              22
+            ],
+            [
+              59,
+              64,
+              57
+            ],
+            [
+              33,
+              44,
+              73
+            ]
+          ]
+        }
+      },
+      "regressor": "RandomForest",
+      "regression_achievement_pct": {
+        "MAE_pct_points": 10.598,
+        "RMSE_pct_points": 13.157,
+        "baseline_MAE_predict_train_mean": 11.769
+      },
+      "regression_production_quantity": {
+        "MAE_units": 80.17,
+        "RMSE_units": 137.85,
+        "baseline_MAE_units_predict_planned_x_train_mean": 96.95
+      }
+    },
+    "shift": {
+      "description": "Current-shift risk estimate. Adds downtime, cycle time, headcount and changeover values observed or expected for the shift.",
+      "classifier": "LogisticRegression",
+      "classification": {
+        "accuracy": 0.9778,
+        "precision_macro": 0.9759,
+        "recall_macro": 0.9804,
+        "f1_macro": 0.9778,
+        "majority_class_baseline_accuracy": 0.4,
+        "confusion_matrix_rows_true_cols_pred": {
+          "labels": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "matrix": [
+            [
+              120,
+              0,
+              0
+            ],
+            [
+              7,
+              173,
+              0
+            ],
+            [
+              0,
+              3,
+              147
+            ]
+          ]
+        }
+      },
+      "regressor": "HistGradientBoosting (XGBoost not installed)",
+      "regression_achievement_pct": {
+        "MAE_pct_points": 0.698,
+        "RMSE_pct_points": 1.155,
+        "baseline_MAE_predict_train_mean": 11.769
+      },
+      "regression_production_quantity": {
+        "MAE_units": 5.86,
+        "RMSE_units": 13.88,
+        "baseline_MAE_units_predict_planned_x_train_mean": 96.95
+      }
+    }
+  },
+  "feature_importance_top": {
+    "cycle_time_ratio": 0.362,
+    "changeover_time_minutes": 0.2796,
+    "downtime_share": 0.2349,
+    "downtime_unplanned_minutes": 0.2188,
+    "actual_cycle_time_avg_seconds": 0.0268,
+    "designed_cycle_time_seconds": 0.0215,
+    "takt_time_seconds": 0.0156,
+    "automation_level": 0.0079,
+    "shift_duration_minutes": 0.0073,
+    "equipment_condition_score": 0.0038
+  }
+}

@@ -1,0 +1,16 @@
+pandas>=2.0,<4
+numpy>=1.24,<3
+scikit-learn>=1.4,<2
+joblib>=1.3
+matplotlib>=3.7
+xgboost>=2.0
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.5,<3
+streamlit>=1.30
+plotly>=5.18
+httpx>=0.27
+pytest>=8.0
+# optional, only for 02_Dataset/download_dataset.py
+# huggingface_hub
